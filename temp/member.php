@@ -1,5 +1,5 @@
 ﻿<?php 
-require_once ('config.php'); 
+require_once('config.php'); 
 
 if(empty($_SESSION['member'])){
 	echo "<script>alert('请进行登陆或注册');location='index.php';</script>";
