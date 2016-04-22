@@ -18,7 +18,7 @@ class User
 
     public function login($username, $password)
     {
-        $sql_pre = 'select password from user where username = :username';
+        $sql_pre = 'SELECT password FROM user WHERE username = :username';
         $res = $this->_db->query($sql_pre, array('username' => $username));
         if ($res == false)
         { //没有此账号
@@ -33,7 +33,7 @@ class User
                 return array('state' => true,
                     'message' => '登录成功');
             }
-            else 
+            else
             {//密码不匹配
                 return array('state' => false,
                     'message' => '密码不匹配');
@@ -41,9 +41,32 @@ class User
         }
     }
 
-    public function register()
+    public function register($param = array())
     {
-        ;
+        if (!empty($param))
+        {
+            $sql_pre = "INSERT INTO user(username, password) VALUES (:username, :password)";
+            $res = $this->_db->exec($sql_pre, $param);
+            if ($res > 0)
+            {
+                return array(
+                    'state' => true,
+                    'message' => '成功注册'
+                );
+            }
+            else if ($res == 0)
+            {
+                return array(
+                    'state' => false,
+                    'message' => '注册失败'
+                );
+            }
+        }
+        return array(
+            'state' => false,
+            'message' => '注册失败'
+        );
+
     }
-    
+
 }

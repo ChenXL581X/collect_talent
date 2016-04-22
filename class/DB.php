@@ -6,11 +6,11 @@
  * Time: 20:53
  */
 
-class DB 
+class DB
 {
     private $config_path = '../config/db.xml';
     private $config = array();
-    private $stmt;
+    private $result;
     private $_db;
     public function __construct()
     {
@@ -29,17 +29,39 @@ class DB
     }
 
     public function query($sql_pre, $param = array()) {
-        $this->stmt = $this->_db->prepare($sql_pre);
-        foreach ($param as $key => $value) {
-            $this->stmt->bindParam($key,$value);
-        }
 //        $this->stmt->setFetchMode(PDO::FETCH_ASSOC);
-        $this->stmt->execute();
-        if ($this->stmt->rowCount() == 0)
+        try
+        {
+            $this->result = $this->_db->prepare($sql_pre);
+            foreach ($param as $key => $value) {
+                $this->result->bindParam($key,$value);
+            }
+            $this->result->execute();
+        } catch (PDOException $e)
+        {
+            die($e->getMessage());
+        }
+        if ($this->result->rowCount() == 0)
         {
             return false;
         }
-        return $this->stmt;
+        return $this->result;
+    }
+
+    public function exec($sql_pre, $param=array()) {
+        try
+        {
+            $this->result = $this->_db->prepare($sql_pre);
+            foreach ($param as $key => $value) {
+                $this->result->bindParam($key,$value);
+            }
+            $this->result->execute();
+        } catch(PDOException $e)
+        {
+            die($e->getMessage());
+        }
+
+        return $this->result->rowCount();
     }
 
     private function getConfig()
