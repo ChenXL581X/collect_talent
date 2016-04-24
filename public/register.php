@@ -49,6 +49,5 @@ if (isset($_POST['regSubmit']))
 
 <script type="text/javascript" src="../js/jquery.js"></script>
 <script type="text/javascript" src="../js/jquery.min.js"></script>
-<script type="text/javascript" src="../js/major.js"></script>
 </body>
 </html>
