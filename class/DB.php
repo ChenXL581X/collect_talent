@@ -15,13 +15,13 @@ class DB
     public function __construct()
     {
         $this->getConfig();
-
         $dsn = "mysql:host={$this->config['hostname']};dbname={$this->config['dbname']}";
+//        echo $dsn;
         try
         {
             $this->_db = new PDO($dsn, $this->config['username'], $this->config['password']);
             $this->_db->exec("SET NAMES UTF-8");
-            echo "db connect success";
+//            echo "db connect success";
         } catch (PDOException $e) {
             die($e->getMessage());
         }

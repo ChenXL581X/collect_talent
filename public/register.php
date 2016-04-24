@@ -6,7 +6,7 @@
  * Time: 13:59
  */
 session_start();
-require_once '../class/User.php';
+require_once '../include/header.php';
 if (isset($_POST['regSubmit']))
 {
     if ($_POST['password'] == $_POST['confirm']) {

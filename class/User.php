@@ -6,7 +6,7 @@
  * Time: 20:52
  */
 
-require_once 'DB.php';
+require_once '../class/DB.php';
 
 class User
 {

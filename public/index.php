@@ -6,7 +6,7 @@
  * Time: 21:52
  */
 session_start();
-
+require_once '../include/autoload.php';
 
 
 echo 'welcome ' . $_SESSION['username'];

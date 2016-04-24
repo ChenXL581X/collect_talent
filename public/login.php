@@ -6,11 +6,7 @@
  * Time: 20:41
  */
 session_start();
-require_once '../class/User.php';
-
-
-
-
+require_once '../include/header.php';
 //自动登录
 if (isset($_COOKIE['username']) && isset($_COOKIE['password']))
 {

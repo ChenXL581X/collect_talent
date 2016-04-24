@@ -1,14 +1,9 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: apple
- * Date: 16/4/18
- * Time: 20:42
+ * User: chenxiaolei
+ * Date: 2016/4/24
+ * Time: 22:10
  */
-
-
-
-
-
-
-?>
+$path = dirname(__FILE__);
+require_once "{$path}/autoload.php";
