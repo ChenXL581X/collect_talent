@@ -22,23 +22,43 @@ if (isset($_POST['loginSubmit']))
 {
 //    echo "submit success";
     if (isset($_POST['username']) && isset($_POST['password'])) {
-        $user = new User();
-        $flag = $user->login($_POST['username'], $_POST['password']);
-        if ($flag['state'] == true)
+        $validator = new Validator();
+        $validator->addRule($_POST['username'], array(
+            'type' => 'username',
+            'length' => array('min' => 4, 'max' => 16),
+            'empty' => false
+        ));
+        $validator->addRule($_POST['password'], array(
+            'type' => 'password',
+            'length' => array('min'=> 4, 'max' => 16)
+        ));
+
+        if ($validator->validate())
         {
-            $_SESSION['username'] = $_POST['username'];
-            $_SESSION['authentic'] = true;
-            if (isset($_POST['remember']) && $_POST['remember'] == 'on')
-            { //设置记住密码
-                setcookie("username", $_POST['username'], time()+3600);
-                setcookie("password", $_POST['password'], time()+3600);
+            $user = new User();
+            $flag = $user->login($_POST['username'], $_POST['password']);
+            if ($flag['state'] == true)
+            {
+                $_SESSION['username'] = $_POST['username'];
+                $_SESSION['authentic'] = true;
+                if (isset($_POST['remember']) && $_POST['remember'] == 'on')
+                { //设置记住密码
+                    setcookie("username", $_POST['username'], time()+3600);
+                    setcookie("password", $_POST['password'], time()+3600);
+                }
+                echo '<script>location.href="index.php"</script>';
             }
-            echo '<script>location.href="index.php"</script>';
+            else
+            {
+                echo '<script>alert("账号或密码错误");</script>';
+            }
         }
         else
         {
-            echo '<script>alert("账号或密码错误");</script>';
+            $message = $validator->error();
+            echo $message;
         }
+
     }
 }
 

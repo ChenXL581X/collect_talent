@@ -10,21 +10,41 @@ require_once '../include/header.php';
 if (isset($_POST['regSubmit']))
 {
     if ($_POST['password'] == $_POST['confirm']) {
-        $user = new User();
-        $param = array(
-            'username' => $_POST['username'],
-            'password' => $_POST['password'],
-        );
-        $flag = $user->register($param);
-        if ($flag['state'] == true)
+
+        $validator = new Validator();
+        $validator->addRule($_POST['username'], array(
+            'type' => 'username',
+            'length' => array('min'=>4, 'max'=>20),
+            'empty' => false
+        ));
+        $validator->addRule($_POST['password'], array(
+            'type' => 'password',
+            'length' => array('min'=>4, 'max'=>20),
+            'empty' => false
+        ));
+        if ($validator->validate())
         {
-            echo '<script>alert("注册成功")</script>';
-            echo '<script>location.href="login.php"</script>';
+            $user = new User();
+            $param = array(
+                'username' => $_POST['username'],
+                'password' => $_POST['password'],
+            );
+            $flag = $user->register($param);
+            if ($flag['state'] == true)
+            {
+                echo '<script>alert("注册成功")</script>';
+                echo '<script>location.href="login.php"</script>';
+            }
+            else
+            {
+                echo '<script>alert("注册失败")</script>';
+            }
         }
         else
         {
-            echo '<script>alert("注册失败")</script>';
+            echo $validator->error();
         }
+
     }
 }
 ?>

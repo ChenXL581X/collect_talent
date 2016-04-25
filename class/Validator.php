@@ -8,7 +8,13 @@
 
 class Validator
 {
-    private $_rule;
+    private $_rule = array();
+    private $_error;
+
+    public function error()
+    {
+        return $this->_error;
+    }
     public function addRule($str, $rule=array())
     {
         $tmp = array(
@@ -18,34 +24,74 @@ class Validator
         array_push($this->_rule,$tmp);
     }
 
-    
+
     private function action()
     {
+        global $flag;
         $flag = true;
         foreach($this->_rule as $items)
         {
-            $str = $item['str'];
-            foreach ($items as $key => $value)
+            $str = $items['str'];
+            foreach ($items['rule'] as $key => $value)
             {
                 switch ($key)
                 {
                     case 'type':
-                        if ($this->)
+                        $fun_name = 'is_' . $value;
+                        $res = $this->$fun_name($str);
+                        if ($res == false)
+                        {
+                            $this->_error = $value . "don't match";
+                            $flag = false;
+                        }
+                    break;
+                    case 'length':
+                        if (!$this->length($str,$value['min'],$value['max']))
+                        {
+                            $this->_error = "length don't match";
+                            $flag = false;
+                        }
+                    break;
+                    case 'empty':
+                        if ($value = false)
+                        {
+                            if ($this->isEmpty($str))
+                            {
+                                $this->_error = "can't be empty";
+                                $flag = false;
+                            }
+                        }
+                    break;
+                    default:
+                        break;
                 }
+
+                if ($flag == false)
+                {
+                    return false;
+                    break;
+                }
+            }
+            if ($flag == false)
+            {
+                return false;
+                break;
             }
         }
         return true;
     }
+
+
     public function validate()
     {
         if ($this->action())
         {
-            $this->_rule = null;
+            $this->_rule = array();
             return true;
         }
         else
         {
-            $this->_rule = null;
+            $this->_rule = array();
             return false;
         }
     }
@@ -61,24 +107,13 @@ class Validator
     /**
      * 验证长度
      * @param: string $str
-     * @param: int $type(方式，默认min <= $str <= max)
-     * @param: int $min,最小值;$max,最大值;
-     * @param: string $charset 字符
+     * @param: int $min,最小值
+     * @param :$max,最大值;
      * @return boolean
      */
-    public  function length($str,$type=3,$min=0,$max=0,$charset = 'utf-8'){
-        if(!self::isEmpty($str)) return false;
-        $len = mb_strlen($str,$charset);
-        switch($type){
-            case 1: //只匹配最小值
-                return ($len >= $min) ? true : false;
-                break;
-            case 2: //只匹配最大值
-                return ($max >= $len) ? true : false;
-                break;
-            default: //min <= $str <= max
-                return (($min <= $len) && ($len <= $max)) ? true : false;
-        }
+    public  function length($str,$min=0,$max=0){
+        $len = mb_strlen($str);
+        return (($min <= $len) && ($len <= $max)) ? true : false;
     }
 
 
@@ -211,7 +246,7 @@ class Validator
      * @param string $username
      * @return bool
      */
-    function is_check_string($username){
+    function is_username($username){
         if(preg_match('/^[\x{4e00}-\x{9fa5}\w_]+$/u',$username)){
             return true;
         }else{
@@ -222,7 +257,7 @@ class Validator
      * 验证密码
      * @return boolean
      */
-    public static function isPWD($value,$minLen=6,$maxLen=16){
+    public static function is_password($value,$minLen=6,$maxLen=16){
         $match='/^[\\~!@#$%^&*()-_=+|{}
 ,.?\/:;\'\"\d\w]{'.$minLen.','.$maxLen.'}$/';
         $v = trim($value);
