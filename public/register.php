@@ -55,19 +55,23 @@ if (isset($_POST['regSubmit']))
     <title>Document</title>
 </head>
 <body>
-<form id="theForm" name="register" method="post" action="<?= $_SERVER['PHP_SELF']?>"  enctype="multipart/form-data">
+<form id="register" name="register" method="post" action="<?= $_SERVER['PHP_SELF']?>"  enctype="multipart/form-data">
     <div>用户注册</div>
     账号:
-    <input name="username" type="text"><br />
+    <input id="username" name="username" type="text"><br />
     密码:
-    <input name="password" type="password" ><br />
+    <input id="password" name="password" type="password" ><br />
     确认密码:
-    <input name="confirm" type="password" ><br />
+    <input id="confirm" name="confirm" type="password" ><br />
     <input type="reset" name="regSet"  value="重置" />
     <input type="submit" name="regSubmit"  value="确定注册" /><br />
 </form>
 
-<script type="text/javascript" src="../js/jquery.js"></script>
-<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery/jquery.js"></script>
+<script type="text/javascript" src="../js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../js/validator/jquery.validate.min.js"></script>
+<script type="text/javascript" src="../js/validator/localization/messages_zh.js"></script>
+<script type="text/javascript" src="../js/register.js"></script>
+
 </body>
 </html>

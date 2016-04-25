@@ -41,14 +41,14 @@ class Validator
                         $res = $this->$fun_name($str);
                         if ($res == false)
                         {
-                            $this->_error = $value . "don't match";
+                            $this->_error = " please input the right form of " . $value;
                             $flag = false;
                         }
                     break;
                     case 'length':
                         if (!$this->length($str,$value['min'],$value['max']))
                         {
-                            $this->_error = "length don't match";
+                            $this->_error = " the length of the element don't match";
                             $flag = false;
                         }
                     break;
@@ -57,7 +57,7 @@ class Validator
                         {
                             if ($this->isEmpty($str))
                             {
-                                $this->_error = "can't be empty";
+                                $this->_error = "the value of the element can't be empty";
                                 $flag = false;
                             }
                         }

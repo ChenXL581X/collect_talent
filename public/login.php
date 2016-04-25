@@ -72,12 +72,20 @@ if (isset($_POST['loginSubmit']))
 </head>
 <body>
 <div>登录</div>
-<form action="<?php  echo $_SERVER['PHP_SELF']?>" method="post" enctype="multipart/form-data">
-    账号: <input type="text" name="username" ><br />
-    密码: <input type="password" name="password"><br />
+<form id="loginForm" name="loginForm" action="<?php  echo $_SERVER['PHP_SELF']?>" method="post" enctype="multipart/form-data">
+    账号: <input type="text" id="username" name="username" ><br />
+    密码: <input type="password" id="password" name="password"><br />
     记住密码? <input type="checkbox" name="remember" value="on"><br />
     <input type="submit" name="loginSubmit" value="登录">
 </form>
+
+
+
+<script type="text/javascript" src="../js/jquery/jquery.js"></script>
+<script type="text/javascript" src="../js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../js/validator/jquery.validate.min.js"></script>
+<script type="text/javascript" src="../js/validator/localization/messages_zh.js"></script>
+<script type="text/javascript" src="../js/login.js"></script>
 </body>
 </html>
 
