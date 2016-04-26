@@ -52,7 +52,7 @@ if (isset($_POST['regSubmit']))
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>注册</title>
 </head>
 <body>
 <form id="register" name="register" method="post" action="<?= $_SERVER['PHP_SELF']?>"  enctype="multipart/form-data">

@@ -45,7 +45,8 @@ class User
     {
         if (!empty($param))
         {
-            $sql_pre = "INSERT INTO user(username, password) VALUES (:username, :password)";
+//            $sql_pre = "INSERT INTO user(username, password) VALUES (:username, :password)";
+            $sql_pre = "insert into user(username, password) values (:username, :password)";
             $res = $this->_db->exec($sql_pre, $param);
             if ($res > 0)
             {

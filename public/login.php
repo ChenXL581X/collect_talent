@@ -63,7 +63,6 @@ if (isset($_POST['loginSubmit']))
 }
 
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,13 +70,16 @@ if (isset($_POST['loginSubmit']))
     <title>登录</title>
 </head>
 <body>
-<div>登录</div>
-<form id="loginForm" name="loginForm" action="<?php  echo $_SERVER['PHP_SELF']?>" method="post" enctype="multipart/form-data">
-    账号: <input type="text" id="username" name="username" ><br />
-    密码: <input type="password" id="password" name="password"><br />
-    记住密码? <input type="checkbox" name="remember" value="on"><br />
-    <input type="submit" name="loginSubmit" value="登录">
-</form>
+<fieldset>
+    <legend>用户登录</legend>
+    <form id="loginForm" name="loginForm" action="<?php  echo $_SERVER['PHP_SELF']?>" method="post" enctype="multipart/form-data">
+        账号: <input type="text" id="username" name="username" ><br />
+        密码: <input type="password" id="password" name="password"><br />
+        记住密码? <input type="checkbox" name="remember" value="on"><br />
+        <input type="submit" name="loginSubmit" value="登录">
+    </form>
+</fieldset>
+
 
 
 
