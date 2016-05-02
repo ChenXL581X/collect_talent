@@ -28,7 +28,7 @@ $(document).ready(function(){
         toolbarFloatOffset: 0,
         toolbarHidden: false,
         pasteImage: true,
-        cleanPaste: true
+        cleanPaste: false
     });
     $('#blogSubmit').click(function () {
         // var username = $('#username').val();

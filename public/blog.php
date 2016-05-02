@@ -31,7 +31,7 @@ require_once '../include/header.php';
             $id = $item['id'];
             $title = $item['title'];
             if (strlen($title) > 15) {
-                $tit = substr($title, 15);
+                $tit = substr($title, 0, 15);
             }
             else {
                 $tit = $title;
