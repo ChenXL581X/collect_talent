@@ -30,4 +30,34 @@ $(document).ready(function(){
         pasteImage: true,
         cleanPaste: true
     });
-});s
+    $('#blogSubmit').click(function () {
+        // var username = $('#username').val();
+        var user_id = $('#user_id').val();
+        var title = $('#title').val();
+        var context = editor.getValue();
+        // alert(context);
+        $.ajax({
+            url: "../run/add_blog_run.php",
+            data: {
+                // username: username,
+                title: title,
+                context: context,
+                user_id: user_id
+            },
+            type : "POST",
+            success : function(result) {
+                console.log(result);
+                result = JSON.parse(result);
+                console.log(result.state);
+                // alert(result.state);
+                if (result.state == true) {
+                    alert('发表成功');
+                    window.location.reload();
+                }
+                else {
+                    alert('发表失败');
+                }
+            }
+        });
+    });
+});

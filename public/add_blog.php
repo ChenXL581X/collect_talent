@@ -1,15 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: chenxiaolei
- * Date: 2016/5/2
- * Time: 12:11
- */
 session_start();
-
-
-
-
+require_once '../include/header.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,11 +20,11 @@ session_start();
 
 <fieldset>
     <legend>发表博客</legend>
-    <form id="blogFrom" name="blogFrom" action="<?= $_SERVER['PHP_SELF']?>" method="post" enctype="multipart/form-data">
-        标题：<input type="text" name="title" autofocus><br />
-        内容：<textarea id="editor" placeholder="输入内容"></textarea><br>
-        <input type="submit" name="blogSubmit" value="发表">
-    </form>
+
+    标题：<input type="text" id ='title' name="title" autofocus><br />
+    内容：<textarea id="editor" name='editor' placeholder="输入内容"></textarea><br>
+        <input type="hidden" id="user_id" name="user_id" value="<?= $_SESSION['user_id']?>">
+        <input type="button" id="blogSubmit" name="blogSubmit" value="发表">
 </fieldset>
 
 <script type="text/javascript" src="../js/add_blog.js"></script>

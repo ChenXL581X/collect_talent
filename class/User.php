@@ -18,7 +18,7 @@ class User
 
     public function login($username, $password)
     {
-        $sql_pre = 'SELECT password FROM user WHERE username = :username';
+        $sql_pre = 'SELECT id, password FROM user WHERE username = :username';
         $res = $this->_db->query($sql_pre, array('username' => $username));
         if ($res == false)
         { //没有此账号
@@ -31,7 +31,9 @@ class User
             if ($password == $result['password'])
             {//密码匹配
                 return array('state' => true,
-                    'message' => '登录成功');
+                    'message' => '登录成功',
+                    'id' => $result['id']
+                );
             }
             else
             {//密码不匹配

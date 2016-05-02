@@ -38,9 +38,11 @@ if (isset($_POST['loginSubmit']))
         {
             $user = new User();
             $flag = $user->login($_POST['username'], $_POST['password']);
+//            var_dump($flag);
             if ($flag['state'] == true)
             {
                 $_SESSION['username'] = $_POST['username'];
+                $_SESSION['user_id'] = $flag['id'];
                 $_SESSION['authentic'] = true;
                 if (isset($_POST['remember']) && $_POST['remember'] == 'on')
                 { //设置记住密码

@@ -21,6 +21,7 @@ class DB
         {
             $this->_db = new PDO($dsn, $this->config['username'], $this->config['password']);
             $this->_db->exec("SET NAMES UTF-8");
+            $this->_db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 //            echo "db connect success";
         } catch (PDOException $e) {
             die($e->getMessage());
@@ -33,7 +34,7 @@ class DB
         try
         {
             $this->result = $this->_db->prepare($sql_pre);
-            foreach ($param as $key => $value) {
+            foreach ($param as $key => &$value) {
                 $this->result->bindParam($key,$value);
             }
             $this->result->execute();
@@ -52,10 +53,11 @@ class DB
         try
         {
             $this->result = $this->_db->prepare($sql_pre);
-            foreach ($param as $key => $value) {
+            foreach ($param as $key => &$value) {
                 $this->result->bindParam($key,$value);
             }
             $this->result->execute();
+//            echo $this->result->errorInfo();
         } catch(PDOException $e)
         {
             echo "error";
