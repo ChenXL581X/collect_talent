@@ -6,6 +6,8 @@
  * Time: 21:59
  */
 
+
+//自动调用函数
 function __autoLoad($classname) {
     $path = dirname(dirname(__FILE__));
     $filename = $path . '/class/' . $classname .".php";

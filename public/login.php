@@ -5,6 +5,7 @@
  * Date: 16/4/18
  * Time: 20:41
  */
+
 session_start();
 require_once '../include/header.php';
 //自动登录
@@ -61,8 +62,9 @@ if (isset($_POST['loginSubmit']))
 
     }
 }
-
 ?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,9 +72,10 @@ if (isset($_POST['loginSubmit']))
     <title>登录</title>
 </head>
 <body>
+
 <fieldset>
     <legend>用户登录</legend>
-    <form id="loginForm" name="loginForm" action="<?php  echo $_SERVER['PHP_SELF']?>" method="post" enctype="multipart/form-data">
+    <form id="loginForm" name="loginForm" action="login.php" method="post" enctype="multipart/form-data">
         账号: <input type="text" id="username" name="username" ><br />
         密码: <input type="password" id="password" name="password"><br />
         记住密码? <input type="checkbox" name="remember" value="on"><br />

@@ -43,10 +43,15 @@ else {
     ?>
     <a href="login.php">登录</a>
     <a href="register.php">注册</a>
+    <br />
     <?php
 }
 ?>
 
+<a href="#">首页</a>
+<a href="./blog.php">文章</a>
+<a href="#">实习</a>
+<a href="#">社区</a>
 
 </body>
 </html>

@@ -58,6 +58,7 @@ class DB
             $this->result->execute();
         } catch(PDOException $e)
         {
+            echo "error";
             die($e->getMessage());
         }
 
